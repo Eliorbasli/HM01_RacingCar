@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private int liveNumber = 3;
     private Timer timer;
 
+
     //View
     private ImageButton main_BTN_Right;
     private ImageButton main_BTN_Left;
@@ -36,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private int CarIndex = 1;
     private int row = 0 ;
     private int col = 0 ;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +76,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
-
-
-
 
     }
 
@@ -160,7 +155,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-
                 runOnUiThread(() -> { 
                     stoneDown();
                 });
@@ -227,12 +221,9 @@ public class MainActivity extends AppCompatActivity {
         if(liveNumber == 0){
             toast("update life");
             liveNumber =3 ;
-            // main_IMG_Life[0].setVisibility(View.VISIBLE);
-            //main_IMG_Life[1].setVisibility(View.VISIBLE);
-            //main_IMG_Life[2].setVisibility(View.VISIBLE);
             for(int i = 0 ; i < 3 ; i ++)
                 main_IMG_Life[i].setVisibility(View.VISIBLE);
-            //onStop();
+
         }
     }
 
