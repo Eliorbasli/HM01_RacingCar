@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Elior/AndroidStudioProjects/HM01_racingCar/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.11822916666666666" />
+        <entry key="..\:/Users/Elior/AndroidStudioProjects/HM01_racingCar/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2515625" />
+        <entry key="..\:/Users/Elior/AndroidStudioProjects/HM01_racingCar/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2515625" />
+        <entry key="..\:/Users/Elior/AndroidStudioProjects/HM01_racingCar/app/src/main/res/drawable/spaceship_icon.xml" value="0.2635416666666667" />
+        <entry key="..\:/Users/Elior/AndroidStudioProjects/HM01_racingCar/app/src/main/res/layout/activity_game.xml" value="0.264" />
         <entry key="..\:/Users/Elior/AndroidStudioProjects/HM01_racingCar/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/Users/Elior/AndroidStudioProjects/HM01_racingCar/app/src/main/res/layout/activity_menu.xml" value="0.2140625" />
+        <entry key="..\:/Users/Elior/AndroidStudioProjects/HM01_racingCar/app/src/main/res/layout/activity_splash.xml" value="0.121875" />
       </map>
     </option>
   </component>

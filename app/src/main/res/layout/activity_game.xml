@@ -6,16 +6,26 @@
     android:layout_height="match_parent"
     android:background="@color/teal_700"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".ActivityGame">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="105"
+        android:layout_weight="110"
         android:background="#7D6BC8"
         android:gravity="right"
         android:orientation="horizontal">
+
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/main_LBL_score"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="30dp"
+            android:text="Score: 0" />
 
         <ImageView
             android:id="@+id/main_IMG_life2"
@@ -23,6 +33,7 @@
             android:layout_height="wrap_content"
 
             app:srcCompat="@drawable/heart" />
+
         <ImageView
             android:id="@+id/main_IMG_life1"
             android:layout_width="40dp"
@@ -34,6 +45,7 @@
             android:layout_height="wrap_content"
 
             app:srcCompat="@drawable/heart" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -51,31 +63,37 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/main_IMG_Left0"
+                android:id="@+id/main_IMG_0_0"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/stone" />
             <ImageView
-                android:id="@+id/main_IMG_Left1"
+                android:id="@+id/main_IMG_1_0"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/stone" />
             <ImageView
-                android:id="@+id/main_IMG_Left2"
+                android:id="@+id/main_IMG_2_0"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/stone" />
             <ImageView
-                android:id="@+id/main_IMG_Left3"
+                android:id="@+id/main_IMG_3_0"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/stone" />
             <ImageView
-                android:id="@+id/main_IMG_Left4"
+                android:id="@+id/main_IMG_4_0"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/stone" />
+            <ImageView
+                android:id="@+id/main_IMG_5_0"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -90,31 +108,131 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/main_IMG_Middle0"
+                android:id="@+id/main_IMG_0_1"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/stone" />
+            <ImageView
+                android:id="@+id/main_IMG_1_1"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/stone" />
+            <ImageView
+                android:id="@+id/main_IMG_2_1"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/stone" />
+            <ImageView
+                android:id="@+id/main_IMG_3_1"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/stone" />
+            <ImageView
+                android:id="@+id/main_IMG_4_1"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/stone" />
+            <ImageView
+                android:id="@+id/main_IMG_5_1"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/stone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="40"
+            android:background="#102630"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/main_IMG_0_2"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/stone" />
+            <ImageView
+                android:id="@+id/main_IMG_1_2"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/stone" />
+            <ImageView
+                android:id="@+id/main_IMG_2_2"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/stone" />
+            <ImageView
+                android:id="@+id/main_IMG_3_2"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/stone" />
+            <ImageView
+                android:id="@+id/main_IMG_4_2"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/stone" />
+            <ImageView
+                android:id="@+id/main_IMG_5_2"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/stone" />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="40"
+            android:background="#102630"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/main_IMG_0_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/stone" />
             <ImageView
-                android:id="@+id/main_IMG_Middle1"
+                android:id="@+id/main_IMG_1_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/stone" />
             <ImageView
-                android:id="@+id/main_IMG_Middle2"
+                android:id="@+id/main_IMG_2_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/stone" />
             <ImageView
-                android:id="@+id/main_IMG_Middle3"
+                android:id="@+id/main_IMG_3_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/stone" />
             <ImageView
-                android:id="@+id/main_IMG_Middle4"
+                android:id="@+id/main_IMG_4_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/stone" />
+            <ImageView
+                android:id="@+id/main_IMG_5_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -131,31 +249,37 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/main_IMG_Right0"
+                android:id="@+id/main_IMG_0_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/stone" />
             <ImageView
-                android:id="@+id/main_IMG_Right1"
+                android:id="@+id/main_IMG_1_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/stone" />
             <ImageView
-                android:id="@+id/main_IMG_Right2"
+                android:id="@+id/main_IMG_2_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/stone" />
             <ImageView
-                android:id="@+id/main_IMG_Right3"
+                android:id="@+id/main_IMG_3_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/stone" />
             <ImageView
-                android:id="@+id/main_IMG_Right4"
+                android:id="@+id/main_IMG_4_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/stone" />
+            <ImageView
+                android:id="@+id/main_IMG_5_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -175,21 +299,33 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/main_IMG_CarInLeft"
+            android:id="@+id/main_IMG_Car0"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/spaceship" />
 
         <ImageView
-            android:id="@+id/main_IMG_CarInMidle"
+            android:id="@+id/main_IMG_Car1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/spaceship" />
 
         <ImageView
-            android:id="@+id/main_IMG_CarInRight"
+            android:id="@+id/main_IMG_Car2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/spaceship" />
+        <ImageView
+            android:id="@+id/main_IMG_Car3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/spaceship" />
+        <ImageView
+            android:id="@+id/main_IMG_Car4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -202,7 +338,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="100"
+        android:layout_weight="105"
         android:background="#78C8EC"
         android:orientation="horizontal">
 
