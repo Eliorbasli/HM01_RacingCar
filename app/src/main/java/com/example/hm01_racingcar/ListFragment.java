@@ -35,20 +35,24 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_list,container , false);
-        initViews(view);
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
 
-        MSP fromJSON = MSP.getInstance();
+        list_RV_records = view.findViewById(R.id.list_RV_top10);
 
-        if (fromJSON != null){
-            String js = fromJSON.getString("MY_DB", "");
-            MyDb newDb = new Gson().fromJson(js,MyDb.class);
+
+
+        MSP msp = MSP.getInstance();
+
+        if(msp != null) {
+            String js = msp.getString("MY_DB", "");
+
+            myDB = new Gson().fromJson(js, MyDb.class);
 
             ArrayList<Record> records = myDB.getRecords();
 
             RecordAdapter recordAdapter = new RecordAdapter(this, myDB.getRecords());
 
-            list_RV_records.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL,false));
+            list_RV_records.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
             list_RV_records.setHasFixedSize(true);
             list_RV_records.setItemAnimator(new DefaultItemAnimator());
             list_RV_records.setAdapter(recordAdapter);
@@ -56,34 +60,25 @@ public class ListFragment extends Fragment {
             recordAdapter.setRecordItemClickListener(new RecordAdapter.RecordItemClickListener() {
                 @Override
                 public void recordItemClick(Record record, int position) {
-                    if(listCallBack != null){
+                    if (listCallBack != null) {
                         double lat = record.getMyLocation().getLatitube();
                         double lon = record.getMyLocation().getLongitube();
-                        listCallBack.RecordClicked(lat,lon);
+                        listCallBack.RecordClicked(lat, lon);
                     }
                 }
             });
         }
-        else{
-
-        }
 
         return view;
-    }
 
-    private void initViews(View view) {
-
-        //list_RV_top10 = view.findViewById(R.id.list_RV_top10);
     }
 
     public void setListCallBack(List_CallBack listCallBack){
         this.listCallBack = listCallBack;
     }
 
-    public void setActivity(AppCompatActivity activity){
+    public void setActivity(AppCompatActivity activity) {
         this.activity = activity;
+
     }
-
-
-
 }

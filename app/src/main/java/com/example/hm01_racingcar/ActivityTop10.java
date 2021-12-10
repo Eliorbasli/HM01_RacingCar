@@ -41,16 +41,16 @@ public class ActivityTop10 extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.rec_top10_googleMap , mapFragment).commit();
 
 
-//        listCallBack = new List_CallBack() {
-//            @Override
-//            public void RecordClicked(double lat, double lon) {
-//                mapFragment.RecordClicked(lat, lon);
-//            }
-//        };
+        listCallBack = new List_CallBack() {
+            @Override
+            public void RecordClicked(double lat, double lon) {
+                mapFragment.RecordClicked(lat, lon);
+            }
+        };
 
-//        listFragment.setActivity(this);
-//
-//        listFragment.setListCallBack(listCallBack);
+        listFragment.setActivity(this);
+
+        listFragment.setListCallBack(listCallBack);
 
     }
 }

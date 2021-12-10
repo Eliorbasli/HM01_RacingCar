@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ImageView
+        android:id="@+id/listItem_IMG_record"
+        android:layout_width="180dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background" />
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/listItem_LBL_Score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/listItem_IMG_record"
+        android:maxLines="2"
+        android:minLines="2"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Record"/>
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/listItem_LBL_lat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listItem_LBL_Score"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_toEndOf="@+id/listItem_IMG_record"
+        android:maxLines="2"
+        android:minLines="2"
+        android:text="lati"
+        android:textSize="14sp" />
+
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/listItem_LBL_long"
+        android:layout_below="@+id/listItem_LBL_lat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/listItem_IMG_record"
+        android:maxLines="2"
+        android:minLines="2"
+        android:textSize="14sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="lati"/>
+
+
+</RelativeLayout>
