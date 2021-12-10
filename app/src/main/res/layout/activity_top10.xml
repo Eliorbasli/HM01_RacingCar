@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="@color/purple_200"
+    tools:context=".ActivityTop10">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="40dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/item_TV_score"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="50dp"
+            android:text="TOP 10"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/rec_LST_records"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="20dp"
+        android:background="#351772" />
+
+    <FrameLayout
+        android:id="@+id/rec_top10_googleMap"
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="20dp"
+        android:background="@color/white" />
+
+
+
+</LinearLayout>

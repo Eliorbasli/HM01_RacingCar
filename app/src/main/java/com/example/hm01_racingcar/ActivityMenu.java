@@ -24,12 +24,11 @@ public class ActivityMenu extends AppCompatActivity {
         menu_BTN_light          = findViewById(R.id.menu_BTN_light);
         menu_BTN_TOP10 = findViewById(R.id.menu_BTN_TOP10);
 
-
         menu_BTN_accelerometer.setOnClickListener(v -> startGame("ACC"));
 
         menu_BTN_light.setOnClickListener(v -> startGame("LIGHT"));
 
-        menu_BTN_TOP10.setOnClickListener(v -> {
+        menu_BTN_TOP10.setOnClickListener(v -> {openTop10();
 
         });
     }
@@ -43,8 +42,13 @@ public class ActivityMenu extends AppCompatActivity {
         //intent.putExtra("bundle", bundle);
         intent.putExtra(ActivityGame.SENSOR_TYPE , sensor);
         startActivity(intent);
-        finish();
-
-
+        //finish();
     }
+
+    private void openTop10(){
+        Intent intent = new Intent(this, ActivityTop10.class );
+        startActivity(intent);
+    }
+
+
 }

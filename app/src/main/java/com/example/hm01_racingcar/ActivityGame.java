@@ -1,13 +1,21 @@
 package com.example.hm01_racingcar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,8 +30,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.Timer;
 import java.util.TimerTask;
+import android.os.FileUtils;
 
 public class ActivityGame<mediaPlayer> extends AppCompatActivity {
 
@@ -32,6 +43,12 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
     private final int STONE = 10;
     private final int STAR = 5;
     private final int NOTHING = 0 ;
+    private LocationManager locationManagaer;
+    private LocationListener locationListener;
+    private double lat;
+    private double lon;
+    private MSP msp;
+    private Gson gson;
 
     private SensorEventListener accSensorEventListener =  new SensorEventListener() {
         @Override
@@ -76,6 +93,7 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
     private int CarIndex = 1;
     private int row = 0 ;
     private int col = 0 ;
+    private static MyDb myDB = new MyDb();
 
     private TextView main_score;
 
@@ -100,23 +118,15 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
 
         findViews();
 
+        gson = new Gson();
+        msp = MSP.getInstance();
+        locationPermission();
+
         Intent intent = getIntent();
 
         main_score.setText(intent.getStringExtra(SENSOR_TYPE));
 
-//        if (equals(intent.getStringExtra(SENSOR_TYPE).equals("ACC")))
-//        {
-//            main_BTN_Right.setVisibility(View.INVISIBLE);
-//            main_BTN_Left.setVisibility(View.INVISIBLE);
-//        }
-//        else if (equals(intent.getStringExtra(SENSOR_TYPE).equals("LIGHT"))){
-//            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-//        }
-
-
-        //Bundle bundle1 =  getIntent().getBundleExtra("bundle");
-       // initSensor();
-       initSensor(intent.getStringExtra(SENSOR_TYPE));
+        initSensor(intent.getStringExtra(SENSOR_TYPE));
 
         main_BTN_Left.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,11 +152,8 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
     }
 
     private void initSensor(String typeSen) {
-            sensorManager =(SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        //switch ()
-//    if(intent.getStringExtra(SENSOR_TYPE) == "ACC"){
-//
-//    }
+        sensorManager =(SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
         Intent intent = getIntent();
         if (intent.getStringExtra(SENSOR_TYPE).equals("ACC"))
         {
@@ -154,31 +161,23 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
             main_BTN_Right.setVisibility(View.INVISIBLE);
             main_BTN_Left.setVisibility(View.INVISIBLE);
         }
-        else if (intent.getStringExtra(SENSOR_TYPE).equals("LIGHT")){
-
+        else// (intent.getStringExtra(SENSOR_TYPE).equals("LIGHT"))
+        {
+            sensorManager.unregisterListener(accSensorEventListener);
         }
-
-
-        //if SENSOR_TYPE == "ACC"
-        //sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-
-        //else
-
-
     }
-    public boolean isSensorExsits(int sensorType){
-        return (sensorManager.getDefaultSensor(sensorType) != null);
-    }
+//    public boolean isSensorExsits(int sensorType){
+//        return (sensorManager.getDefaultSensor(sensorType) != null);
+//    }
 
     @Override
     protected void onStart() {
         super.onStart();
         startRace();
-
     }
     @Override
     protected void onStop(){
-//        super.onStop();
+        super.onStop();
     }
 
     private void findViews() {
@@ -218,28 +217,28 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
                         findViewById(R.id.main_IMG_1_2),
                         findViewById(R.id.main_IMG_1_3),
                         findViewById(R.id.main_IMG_1_4)
-                        },
+                },
                 {
                         findViewById(R.id.main_IMG_2_0),
                         findViewById(R.id.main_IMG_2_1),
                         findViewById(R.id.main_IMG_2_2),
                         findViewById(R.id.main_IMG_2_3),
                         findViewById(R.id.main_IMG_2_4),
-                        },
+                },
                 {
                         findViewById(R.id.main_IMG_3_0),
                         findViewById(R.id.main_IMG_3_1),
                         findViewById(R.id.main_IMG_3_2),
                         findViewById(R.id.main_IMG_3_3),
                         findViewById(R.id.main_IMG_3_4),
-                        },
+                },
                 {
                         findViewById(R.id.main_IMG_4_0),
                         findViewById(R.id.main_IMG_4_1),
                         findViewById(R.id.main_IMG_4_2),
                         findViewById(R.id.main_IMG_4_3),
                         findViewById(R.id.main_IMG_4_4),
-                   },
+                },
                 {
                         findViewById(R.id.main_IMG_5_0),
                         findViewById(R.id.main_IMG_5_1),
@@ -269,8 +268,7 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-
-                runOnUiThread(() -> { 
+                runOnUiThread(() -> {
                     stoneDown();
                 });
             }
@@ -291,7 +289,7 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
                     boardVisible[i+1][j] = STONE;
                 }
                 else if(boardVisible[i][j] == STAR){
-                  //  Log.d("board","board = 5");
+                    //  Log.d("board","board = 5");
                     main_IMG_Stone[i][j].setVisibility(View.INVISIBLE);
                     boardVisible[i][j] = NOTHING;
                     main_IMG_Stone[i+1][j].setImageResource(imageVies[0]);
@@ -308,12 +306,12 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
         //create new stone in first row
         RandomNumber = (int)(Math.random() * (8));
 
-       if(RandomNumber > 0 && RandomNumber < 5){
+        if(RandomNumber > 0 && RandomNumber < 5){
             createStone();
-       }
-       else if (RandomNumber > 5){
-           createCoin();
-       }
+        }
+        else if (RandomNumber > 5){
+            createCoin();
+        }
     }
 
     private void createCoin() {
@@ -368,7 +366,7 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
                     scores++ ;
                     main_score.setText("Scores: " + scores);
                 }
-                    vibrate();
+                vibrate();
 
             }
             main_IMG_Stone[rowNumbers -1][j].setVisibility(View.INVISIBLE);
@@ -379,14 +377,41 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
 
 
     private void reducelife(){
-        main_IMG_Life[liveNumber-1].setVisibility(View.INVISIBLE);
-        liveNumber--;
-        if(liveNumber == 0){
-            toast("update life");
-            liveNumber =3 ;
-            for(int i = 0 ; i < 3 ; i ++)
-                main_IMG_Life[i].setVisibility(View.VISIBLE);
+        if(liveNumber == 0) {
+            gameOver();
         }
+        if(liveNumber > 0 ){
+            main_IMG_Life[liveNumber-1].setVisibility(View.INVISIBLE);
+            liveNumber--;
+        }
+
+
+        // liveNumber =3 ;
+//            for(int i = 0 ; i < 3 ; i ++)
+//                main_IMG_Life[i].setVisibility(View.VISIBLE);
+
+    }
+
+    private void gameOver() {
+        // toast("Game Over");
+
+        timer.cancel();
+
+        if (sensorManager != null)
+            sensorManager.unregisterListener(accSensorEventListener);
+
+        MSP msp1 = MSP.getInstance();
+        if(msp1 != null) {
+            String js = msp1.getString("MY_DB" , "");
+            myDB = new Gson().fromJson(js, MyDb.class);
+        }
+
+        myDB.addRecord(new Record().setScore(scores).setMyLocation(new MyLocation((lat), (lon))));
+
+        Log.e("String" , "gameOver: ");
+        Intent intent = new Intent(this, ActivityTop10.class );
+        startActivity(intent);
+        finish();
     }
 
     private void moveLeft(){
@@ -416,6 +441,23 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
         }
     }
 
+    private void locationPermission(){
+        locationManagaer = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(@NonNull Location location) {
+                lat = location.getLatitude();
+                lon = location.getLongitude();
+            }
+        };
+
+        if(ContextCompat.checkSelfPermission(this , Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this , new String[]{Manifest.permission.ACCESS_FINE_LOCATION} , 1);
+        }
+        else{
+            locationManagaer.requestLocationUpdates(locationManagaer.GPS_PROVIDER, 0 ,1, locationListener);
+        }
+    }
 
 }
