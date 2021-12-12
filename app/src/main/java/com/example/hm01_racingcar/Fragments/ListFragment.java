@@ -43,8 +43,6 @@ public class ListFragment extends Fragment {
         String js = MSP.getInstance(activity).getString("MY_DB", "");
 
 
-
-
         MyDb myDB;
         if (js.isEmpty())
             myDB = new MyDb();
@@ -54,9 +52,6 @@ public class ListFragment extends Fragment {
         list_RV_records = view.findViewById(R.id.list_RV_top10);
 
         records = myDB.getRecords();
-
-
-
 
         RecordAdapter recordAdapter = new RecordAdapter(this, myDB.getRecords());
 
@@ -69,15 +64,14 @@ public class ListFragment extends Fragment {
             @Override
             public void recordItemClick(Record record, int position) {
                 if (listCallBack != null) {
-                    double lat = record.getMyLocation().getLatitube();
-                    double lon = record.getMyLocation().getLongitube();
+                    double lat = record.getLat();
+                    double lon = record.getLon();
                     listCallBack.RecordClicked(lat, lon);
                 }
             }
         });
 
         return view;
-
     }
 
     public void setListCallBack(List_CallBack listCallBack) {

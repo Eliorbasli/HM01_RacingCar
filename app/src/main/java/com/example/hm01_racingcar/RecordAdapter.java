@@ -85,7 +85,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             listItem_LBL_Score = itemView.findViewById(R.id.listItem_LBL_Score);
            //listItem_IMG_record = itemView.findViewById(R.id.listItem_IMG_record);
 
-            itemView.setOnClickListener(
+            listItem_LBL_Score.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

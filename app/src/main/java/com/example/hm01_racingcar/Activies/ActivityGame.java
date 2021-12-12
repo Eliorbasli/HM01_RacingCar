@@ -413,7 +413,12 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
                 myDB = new Gson().fromJson(js, MyDb.class);
             int x =5;
         }
-        myDB.addRecord(new Record().setScore(scores).setLon(15.23).setLat(14.56123));
+
+        //32.061837
+        myDB.addRecord(new Record().setScore(scores).setLat(32.061837).setLon(34.81271021));
+
+        String jsonRecords = new Gson().toJson(myDB);
+        MSP.getInstance(this).putString("MY_DB", jsonRecords);
 
 
         Log.e("String" , "gameOver: ");
