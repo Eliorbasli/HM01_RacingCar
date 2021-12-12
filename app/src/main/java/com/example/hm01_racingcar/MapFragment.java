@@ -41,8 +41,10 @@ public class MapFragment extends Fragment {
             public void onMapReady(GoogleMap googleMap) {
                 recordMap = googleMap;
 
-                LatLng israel = new LatLng(31.4117, 35.0818);
-                googleMap.addMarker(new MarkerOptions().position(israel).title("Israel"));
+
+                LatLng israel = new LatLng(32.062061, 34.812743);
+
+                googleMap.addMarker(new MarkerOptions().position(israel));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(israel));
             }
         });

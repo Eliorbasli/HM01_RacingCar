@@ -6,12 +6,11 @@ import java.util.Comparator;
 
 public class MyDb {
 
-    public ArrayList<Record> records;
+    public ArrayList<Record> records = new ArrayList<>();
+    ;
     public final static int MAX_RECORDS = 10;
 
     public MyDb() {
-
-        records = new ArrayList<>();
     }
 
     public ArrayList<Record> getRecords() {
@@ -44,7 +43,6 @@ public class MyDb {
         });
         return records;
     }
-
 
 
 }

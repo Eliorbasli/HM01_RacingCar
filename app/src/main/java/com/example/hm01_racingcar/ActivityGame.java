@@ -50,6 +50,45 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
     private MSP msp;
     private Gson gson;
 
+    //Timer and Dealy
+    private static final int DELAY = 800;
+    //private int clock = 10;
+    private int liveNumber = 3;
+    private Timer timer;
+
+    private int colNumbers = 5;
+    private int rowNumbers = 6;
+    private int scores = 0 ;
+
+    private int RandomNumber = 0 ;
+    private int[] imageVies = new int[5];
+
+
+    //View
+    private ImageButton main_BTN_Right;
+    private ImageButton main_BTN_Left;
+    private ImageView[][] main_IMG_Stone;
+    private ImageView[] main_IMG_Car;
+    private ImageView[] main_IMG_Life;
+    private int CarIndex = 1;
+    private int row = 0 ;
+    private int col = 0 ;
+    private MyDb myDB;
+    private TextView main_score;
+
+    private int [][] boardVisible = {
+            { 0, 0, 0 ,0 , 0},
+            { 0, 0, 0 ,0 , 0},
+            { 0, 0, 0 ,0 , 0},
+            { 0, 0, 0 ,0 , 0},
+            { 0, 0, 0 ,0 , 0},
+            { 0, 0, 0 ,0 , 0},
+    };
+
+    public static final String SENSOR_TYPE = "SENSOR_TYPE";
+    public static final String NAME = "NAME";
+
+
     private SensorEventListener accSensorEventListener =  new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
@@ -71,46 +110,6 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
         }
     };
 
-    //Timer and Dealy
-    private static final int DELAY = 800;
-    private int clock = 10;
-    private int liveNumber = 3;
-    private Timer timer;
-
-    private int colNumbers = 5;
-    private int rowNumbers = 6;
-    private int scores = 0 ;
-
-    private int RandomNumber = 0 ;
-    private int[] imageVies = new int[5];
-
-    //View
-    private ImageButton main_BTN_Right;
-    private ImageButton main_BTN_Left;
-    private ImageView[][] main_IMG_Stone;
-    private ImageView[] main_IMG_Car;
-    private ImageView[] main_IMG_Life;
-    private int CarIndex = 1;
-    private int row = 0 ;
-    private int col = 0 ;
-    private static MyDb myDB = new MyDb();
-
-    private TextView main_score;
-
-    //0 - Invisbale
-
-    private int [][] boardVisible = {
-            { 0, 0, 0 ,0 , 0},
-            { 0, 0, 0 ,0 , 0},
-            { 0, 0, 0 ,0 , 0},
-            { 0, 0, 0 ,0 , 0},
-            { 0, 0, 0 ,0 , 0},
-            { 0, 0, 0 ,0 , 0},
-    };
-
-    public static final String SENSOR_TYPE = "SENSOR_TYPE";
-    public static final String NAME = "NAME";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,13 +118,13 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
         findViews();
 
         gson = new Gson();
-        msp = MSP.getInstance();
+        //msp.init(this);
+        msp = MSP.getInstance(this);
+
         locationPermission();
 
         Intent intent = getIntent();
-
         main_score.setText(intent.getStringExtra(SENSOR_TYPE));
-
         initSensor(intent.getStringExtra(SENSOR_TYPE));
 
         main_BTN_Left.setOnClickListener(new View.OnClickListener() {
@@ -166,9 +165,7 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
             sensorManager.unregisterListener(accSensorEventListener);
         }
     }
-//    public boolean isSensorExsits(int sensorType){
-//        return (sensorManager.getDefaultSensor(sensorType) != null);
-//    }
+
 
     @Override
     protected void onStart() {
@@ -400,13 +397,21 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
         if (sensorManager != null)
             sensorManager.unregisterListener(accSensorEventListener);
 
-        MSP msp1 = MSP.getInstance();
-        if(msp1 != null) {
-            String js = msp1.getString("MY_DB" , "");
-            myDB = new Gson().fromJson(js, MyDb.class);
-        }
+        MSP msp = MSP.getInstance(this);
 
-        myDB.addRecord(new Record().setScore(scores).setMyLocation(new MyLocation((lat), (lon))));
+
+
+        if(msp != null) {
+            String js = msp.getString("MY_DB" , "");
+
+            if (js.isEmpty())
+                myDB = new MyDb();
+            else
+                myDB = new Gson().fromJson(js, MyDb.class);
+            int x =5;
+        }
+            myDB.addRecord(new Record().setScore(scores).setMyLocation(new MyLocation((lat), (lon))));
+
 
         Log.e("String" , "gameOver: ");
         Intent intent = new Intent(this, ActivityTop10.class );

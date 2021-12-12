@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
+import com.google.mlkit.common.sdkinternal.SharedPrefManager;
 
 import java.util.ArrayList;
 
@@ -23,9 +24,6 @@ public class ListFragment extends Fragment {
 
 
     private RecyclerView list_RV_top10;
-
-
-    public MyDb myDB;
     private List_CallBack listCallBack;
     private ArrayList<Record> records;
     private AppCompatActivity activity;
@@ -40,40 +38,46 @@ public class ListFragment extends Fragment {
         list_RV_records = view.findViewById(R.id.list_RV_top10);
 
 
+        //  MSP msp = MSP;
 
-        MSP msp = MSP.getInstance();
+        //MSP msp = null;
 
-        if(msp != null) {
-            String js = msp.getString("MY_DB", "");
 
+        //  if(msp != null) {
+        String js = MSP.getInstance(activity).getString("MY_DB", "");
+        MyDb myDB;
+        if (js.isEmpty())
+            myDB = new MyDb();
+        else
             myDB = new Gson().fromJson(js, MyDb.class);
 
-            ArrayList<Record> records = myDB.getRecords();
+        records = myDB.getRecords();
 
-            RecordAdapter recordAdapter = new RecordAdapter(this, myDB.getRecords());
+        //RecordAdapter recordAdapter = new RecordAdapter(this, myDB.getRecords());
+        RecordAdapter recordAdapter = new RecordAdapter(this, myDB.getRecords());
 
-            list_RV_records.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
-            list_RV_records.setHasFixedSize(true);
-            list_RV_records.setItemAnimator(new DefaultItemAnimator());
-            list_RV_records.setAdapter(recordAdapter);
+        list_RV_records.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
+        list_RV_records.setHasFixedSize(true);
+        list_RV_records.setItemAnimator(new DefaultItemAnimator());
+        list_RV_records.setAdapter(recordAdapter);
 
-            recordAdapter.setRecordItemClickListener(new RecordAdapter.RecordItemClickListener() {
-                @Override
-                public void recordItemClick(Record record, int position) {
-                    if (listCallBack != null) {
-                        double lat = record.getMyLocation().getLatitube();
-                        double lon = record.getMyLocation().getLongitube();
-                        listCallBack.RecordClicked(lat, lon);
-                    }
+        recordAdapter.setRecordItemClickListener(new RecordAdapter.RecordItemClickListener() {
+            @Override
+            public void recordItemClick(Record record, int position) {
+                if (listCallBack != null) {
+                    double lat = record.getMyLocation().getLatitube();
+                    double lon = record.getMyLocation().getLongitube();
+                    listCallBack.RecordClicked(lat, lon);
                 }
-            });
-        }
+            }
+        });
+        //   }
 
         return view;
 
     }
 
-    public void setListCallBack(List_CallBack listCallBack){
+    public void setListCallBack(List_CallBack listCallBack) {
         this.listCallBack = listCallBack;
     }
 
