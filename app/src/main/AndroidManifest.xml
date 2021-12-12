@@ -14,19 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HM01_racingCar">
         <activity
-            android:name=".ActivityTop10"
+            android:name=".Activies.ActivityTop10"
             android:exported="false" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCpOw5hIF36Z9rlEPtDdQq72B_ixLvnZK0" />
         <activity
-            android:name=".ActivityMenu"
+            android:name=".Activies.ActivityMenu"
             android:exported="false" />
         <activity
-            android:name=".ActivityGame"
+            android:name=".Activies.ActivityGame"
             android:exported="false" />
         <activity
-            android:name=".ActivitySplash"
+            android:name=".Activies.ActivitySplash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

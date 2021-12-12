@@ -1,4 +1,4 @@
-package com.example.hm01_racingcar;
+package com.example.hm01_racingcar.Activies;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,11 +30,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hm01_racingcar.Utiles.MSP;
+import com.example.hm01_racingcar.Models.MyDb;
+import com.example.hm01_racingcar.R;
+import com.example.hm01_racingcar.Models.Record;
 import com.google.gson.Gson;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import android.os.FileUtils;
 
 public class ActivityGame<mediaPlayer> extends AppCompatActivity {
 
@@ -51,7 +54,7 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
     private Gson gson;
 
     //Timer and Dealy
-    private static final int DELAY = 800;
+    private static final int DELAY = 600;
     //private int clock = 10;
     private int liveNumber = 3;
     private Timer timer;
@@ -410,7 +413,7 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
                 myDB = new Gson().fromJson(js, MyDb.class);
             int x =5;
         }
-            myDB.addRecord(new Record().setScore(scores).setMyLocation(new MyLocation((lat), (lon))));
+        myDB.addRecord(new Record().setScore(scores).setLon(15.23).setLat(14.56123));
 
 
         Log.e("String" , "gameOver: ");
@@ -427,7 +430,6 @@ public class ActivityGame<mediaPlayer> extends AppCompatActivity {
 
         }
         else { // carIndex == 0
-            //main_IMG_Car[1].setVisibility(View.INVISIBLE);
             main_IMG_Car[0].setVisibility(View.VISIBLE);
             CarIndex = 0;
         }

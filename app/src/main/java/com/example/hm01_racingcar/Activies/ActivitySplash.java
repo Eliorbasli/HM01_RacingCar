@@ -1,4 +1,4 @@
-package com.example.hm01_racingcar;
+package com.example.hm01_racingcar.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,9 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
+
+import com.example.hm01_racingcar.Activies.ActivityMenu;
+import com.example.hm01_racingcar.R;
 
 public class ActivitySplash extends AppCompatActivity {
 

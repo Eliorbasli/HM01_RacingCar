@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_400"
-    tools:context=".ActivityMenu">
+    tools:context=".Activies.ActivityMenu">
 
 
     <com.google.android.material.button.MaterialButton

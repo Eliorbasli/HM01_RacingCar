@@ -1,4 +1,4 @@
-package com.example.hm01_racingcar;
+package com.example.hm01_racingcar.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
+import com.example.hm01_racingcar.R;
 import com.google.android.material.button.MaterialButton;
 
 public class ActivityMenu extends AppCompatActivity {

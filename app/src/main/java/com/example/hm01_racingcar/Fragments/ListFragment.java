@@ -1,4 +1,4 @@
-package com.example.hm01_racingcar;
+package com.example.hm01_racingcar.Fragments;
 
 import android.os.Bundle;
 
@@ -14,8 +14,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.hm01_racingcar.List_CallBack;
+import com.example.hm01_racingcar.Models.MyDb;
+import com.example.hm01_racingcar.R;
+import com.example.hm01_racingcar.Models.Record;
+import com.example.hm01_racingcar.RecordAdapter;
+import com.example.hm01_racingcar.Utiles.MSP;
 import com.google.gson.Gson;
-import com.google.mlkit.common.sdkinternal.SharedPrefManager;
 
 import java.util.ArrayList;
 
@@ -35,25 +40,24 @@ public class ListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_list, container, false);
 
-        list_RV_records = view.findViewById(R.id.list_RV_top10);
-
-
-        //  MSP msp = MSP;
-
-        //MSP msp = null;
-
-
-        //  if(msp != null) {
         String js = MSP.getInstance(activity).getString("MY_DB", "");
+
+
+
+
         MyDb myDB;
         if (js.isEmpty())
             myDB = new MyDb();
         else
             myDB = new Gson().fromJson(js, MyDb.class);
 
+        list_RV_records = view.findViewById(R.id.list_RV_top10);
+
         records = myDB.getRecords();
 
-        //RecordAdapter recordAdapter = new RecordAdapter(this, myDB.getRecords());
+
+
+
         RecordAdapter recordAdapter = new RecordAdapter(this, myDB.getRecords());
 
         list_RV_records.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
@@ -71,7 +75,6 @@ public class ListFragment extends Fragment {
                 }
             }
         });
-        //   }
 
         return view;
 

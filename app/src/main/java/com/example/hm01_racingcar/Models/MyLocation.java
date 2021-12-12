@@ -1,4 +1,4 @@
-package com.example.hm01_racingcar;
+package com.example.hm01_racingcar.Models;
 
 public class MyLocation {
     private double latitube;

@@ -1,5 +1,8 @@
 package com.example.hm01_racingcar;
 
+import com.example.hm01_racingcar.Models.MyLocation;
+import com.example.hm01_racingcar.Models.Record;
+
 import java.util.ArrayList;
 
 public class RecordManager {

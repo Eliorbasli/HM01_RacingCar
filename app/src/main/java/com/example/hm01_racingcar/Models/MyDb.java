@@ -1,4 +1,4 @@
-package com.example.hm01_racingcar;
+package com.example.hm01_racingcar.Models;
 
 import java.util.ArrayList;
 import java.util.Collections;

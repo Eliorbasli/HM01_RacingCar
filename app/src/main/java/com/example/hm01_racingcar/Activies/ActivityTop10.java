@@ -1,4 +1,4 @@
-package com.example.hm01_racingcar;
+package com.example.hm01_racingcar.Activies;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.FrameLayout;
 
-import android.os.FileUtils;
+import com.example.hm01_racingcar.Fragments.ListFragment;
+import com.example.hm01_racingcar.List_CallBack;
+import com.example.hm01_racingcar.Fragments.MapFragment;
+import com.example.hm01_racingcar.R;
 
 
 public class ActivityTop10 extends AppCompatActivity {
